@@ -4,24 +4,24 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class DataKandidat extends Migration
+class NilaiGap extends Migration
 {
     public function up()
     {
-        //Kecerdasan
-		$this->forge->addField([
+        //
+        $this->forge->addField([
 			'id'            => [
                 'type'              => 'INT', 
                 'constraint'	    => 11, 
                 'unsigned'          => true, 
                 'auto_increment'    => true
-            ],
-            'id_nama_kandidat'	    => [
+            ],            
+            'id_nama_kandidat'	=> [
                 'type'          => 'INT', 
-                'constraint'	=> 11,
+                'constraint'	=> 11, 
                 'unsigned'      => true
             ],
-			'i1'	=> [
+            'i1'	=> [
                 'type'          => 'INT', 
                 'constraint'    => 11
             ],
@@ -61,7 +61,7 @@ class DataKandidat extends Migration
                 'type'          => 'INT', 
                 'constraint'    => 11
             ],
-			's1'	=> [
+            's1'	=> [
                 'type'          => 'INT', 
                 'constraint'    => 11
             ],
@@ -85,7 +85,7 @@ class DataKandidat extends Migration
                 'type'          => 'INT', 
                 'constraint'    => 11
             ],
-			'p1'	=> [
+            'p1'	=> [
                 'type'          => 'INT', 
                 'constraint'    => 11
             ],
@@ -105,15 +105,16 @@ class DataKandidat extends Migration
 			'updated_at datetime default current_timestamp on update current_timestamp'
 		]);
 
-        $this->forge->addKey('id', true)->addKey(['id_nama_kandidat']);
-        $this->forge->addForeignKey('id_nama_kandidat', 'nama_kandidat', 'id', 'cascade', 'restrict');
-		$this->forge->createTable('data_kandidat', true);
+		$this->forge->addKey('id', true)->addKey(['id_nama_kandidat']);
 
+        $this->forge->addForeignKey('id_nama_kandidat', 'nama_kandidat', 'id', 'cascade', 'restrict');
+
+		$this->forge->createTable('nilai_gap', true);
     }
 
-    
     public function down()
     {
-        $this->forge->dropTable('data_kandidat', true);
+        //
+        $this->forge->dropTable('nilai_gap', true);
     }
 }

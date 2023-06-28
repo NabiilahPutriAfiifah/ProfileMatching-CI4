@@ -59,35 +59,15 @@
                 <?php } ?>
                 <li class="nav-item">
                     <a href="<?= base_url('nama_kandidat') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-user-tie"></i>
+                        <i class="nav-icon fas fa-user-check"></i>
                         <p>Nama Kandidat</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-check"></i>
-                        <p> Data Kandidat <i class="right fas fa-angle-left"></i></p>
+                    <a href="<?= base_url('data_kandidat') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-user-tie"></i>
+                        <p>Data Kandidat</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('data_kandidat/kecerdasan') ?>" class="nav-link">
-                                <i class="nav-icon fas fa-brain"></i>
-                                <p> Kecerdasan </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('data_kandidat/sikap_kerja') ?>" class="nav-link">
-                                <i class="nav-icon fas fa-briefcase"></i>
-                                <p> Sikap Kerja </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('data_kandidat/perilaku') ?>" class="nav-link">
-                                <i class="nav-icon fas fa-people-carry"></i>
-                                <p> Perilaku </p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <!-- <li class="nav-item">
@@ -103,7 +83,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('nilai_gap') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-brain"></i>
                                 <p> Menghitung GAP </p>
                             </a>

@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
     <div class="card">
-        <form action="<?= base_url('data_kandidat/submit_changes_kecerdasan') ?>" method="post">
+        <form action="<?= base_url('data_kandidat/submit_changes_data_kandidat') ?>" method="post">
             <div class="card-body">
                 <div class="form-group">
                     <label for="nama">Nama Kandidat:</label>
@@ -123,6 +123,116 @@
                             <option value="5">5 - Sangat Baik</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[10]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="s1" id="s1">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[11]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="s2" id="s2">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[12]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="s3" id="s3">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[13]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="s4" id="s4">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[14]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="s5" id="s5">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[15]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="s6" id="s6">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[16]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="p1" id="p1">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[17]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="p2" id="p2">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[18]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="p3" id="p3">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nama"><?= $faktor_penilaian[19]->nama_kriteria ?> :</label>
+                    <select class="form-control select2" name="p4" id="p4">
+                        <option disabled selected hidden>Pilih Data</option>
+                        <option value="1">1 - Sangat Buruk</option>
+                        <option value="2">2 - Buruk</option>
+                        <option value="3">3 - Cukup</option>
+                        <option value="4">4 - Baik</option>
+                        <option value="5">5 - Sangat Baik</option>
+                    </select>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn text-light" style="background-color: #55596b;">Submit</button>

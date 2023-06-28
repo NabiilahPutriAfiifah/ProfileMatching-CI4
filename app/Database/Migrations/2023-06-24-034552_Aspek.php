@@ -57,6 +57,13 @@ class Aspek extends Migration
                 'bobot_core'        => 65,
                 'bobot_secondary'   => 35,
             ],
+            [
+                'kode_aspek'        => 'AA03',
+                'nama_aspek'        => 'Perilaku',
+                'persentase'        => 40,
+                'bobot_core'        => 65,
+                'bobot_secondary'   => 35,
+            ],
         ]);
     }
 

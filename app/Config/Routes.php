@@ -57,13 +57,17 @@ $routes->add('/nama_kandidat', 'NamaKandidat::nama_kandidat');
 $routes->add('/nama_kandidat/(:any)', 'NamaKandidat::$1');
 
 //Data Kandidat
-// $routes->add('/data_kandidat', 'DataKandidat::data_kandidat');
-// $routes->add('/data_kandidat/(:any)', 'DataKandidat::$1');
+$routes->add('/data_kandidat', 'DataKandidat::data_kandidat');
 $routes->add('/data_kandidat/(:any)', 'DataKandidat::$1');
+// $routes->add('/data_kandidat/(:any)', 'DataKandidat::$1');
 
 //Tabel Pembobotan
 $routes->add('/tabel_pembobotan', 'TabelPembobotan::tabel_pembobotan');
 $routes->add('/tabel_pembobotan/(:any)', 'TabelPembobotan::$1');
+
+//Nilai Gap
+$routes->add('/nilai_gap', 'NilaiGap::nilai_gap');
+$routes->add('/nilai_gap/(:any)', 'NilaiGap::$1');
 
 /*
  * --------------------------------------------------------------------

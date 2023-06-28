@@ -4,7 +4,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <form action="<?= base_url('data_kandidat/submit_changes_kecerdasan') ?>" method="post">
+            <form action="<?= base_url('data_kandidat/submit_changes_data_kandidat') ?>" method="post">
                 <input type="hidden" name="id" value="<?= isset($data['id']) ? $data['id'] : '' ?>">
                 <div class="card-body">
                     <div class="form-group">
@@ -183,6 +183,166 @@
                                 Baik
                             </option>
                             <option value="5" <?= isset($data['i10']) && $data['i10'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[10]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="s1" id="s1">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['s1']) && $data['s1'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['s1']) && $data['s1'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['s1']) && $data['s1'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['s1']) && $data['s1'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['s1']) && $data['s1'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[11]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="s2" id="s2">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['s2']) && $data['s2'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['s2']) && $data['s2'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['s2']) && $data['s2'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['s2']) && $data['s2'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['s2']) && $data['s2'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[12]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="s3" id="s3">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['s3']) && $data['s3'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['s3']) && $data['s3'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['s3']) && $data['s3'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['s3']) && $data['s3'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['s3']) && $data['s3'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[13]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="s4" id="s4">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['s4']) && $data['s4'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['s4']) && $data['s4'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['s4']) && $data['s4'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['s4']) && $data['s4'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['s4']) && $data['s4'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[14]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="s5" id="s5">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['s5']) && $data['s5'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['s5']) && $data['s5'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['s5']) && $data['s5'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['s5']) && $data['s5'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['s5']) && $data['s5'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[15]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="s6" id="s6">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['s6']) && $data['s6'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['s6']) && $data['s6'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['s6']) && $data['s6'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['s6']) && $data['s6'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['s6']) && $data['s6'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[16]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="p1" id="p1">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['p1']) && $data['p1'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['p1']) && $data['p1'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['p1']) && $data['p1'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['p1']) && $data['p1'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['p1']) && $data['p1'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[17]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="p2" id="p2">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['p2']) && $data['p2'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['p2']) && $data['p2'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['p2']) && $data['p2'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['p2']) && $data['p2'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['p2']) && $data['p2'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[18]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="p3" id="p3">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['p3']) && $data['p3'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['p3']) && $data['p3'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['p3']) && $data['p3'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['p3']) && $data['p3'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['p3']) && $data['p3'] == "5" ? 'selected' : ''?>>5 -
+                                Sangat Baik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama"><?= $faktor_penilaian[19]->nama_kriteria ?> :</label>
+                        <select class="form-control select2" name="p4" id="p4">
+                            <option disabled selected hidden>Pilih Data</option>
+                            <option value="1" <?= isset($data['p4']) && $data['p4'] == "1" ? 'selected' : ''?>>1 -
+                                Sangat Buruk</option>
+                            <option value="2" <?= isset($data['p4']) && $data['p4'] == "2" ? 'selected' : ''?>>2 - Buruk
+                            </option>
+                            <option value="3" <?= isset($data['p4']) && $data['p4'] == "3" ? 'selected' : ''?>>3 - Cukup
+                            </option>
+                            <option value="4" <?= isset($data['p4']) && $data['p4'] == "4" ? 'selected' : ''?>>4 - Baik
+                            </option>
+                            <option value="5" <?= isset($data['p4']) && $data['p4'] == "5" ? 'selected' : ''?>>5 -
                                 Sangat Baik</option>
                         </select>
                     </div>
