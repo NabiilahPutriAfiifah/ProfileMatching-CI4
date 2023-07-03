@@ -5,7 +5,8 @@
     <div class="container-fluid">
         <div class="card">
             <form action="<?= base_url('data_kandidat/submit_changes_data_kandidat') ?>" method="post">
-                <input type="hidden" name="id" value="<?= isset($data['id']) ? $data['id'] : '' ?>">
+                <input type="hidden" name="id"
+                    value="<?= isset($data['id_nama_kandidat']) ? $data['id_nama_kandidat'] : '' ?>">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="nama">Nama Kandidat:</label>

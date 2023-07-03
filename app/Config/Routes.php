@@ -69,6 +69,10 @@ $routes->add('/tabel_pembobotan/(:any)', 'TabelPembobotan::$1');
 $routes->add('/nilai_gap', 'NilaiGap::nilai_gap');
 $routes->add('/nilai_gap/(:any)', 'NilaiGap::$1');
 
+//Pembobotan Gap
+$routes->add('/pembobotan_gap', 'PembobotanGap::pembobotan_gap');
+$routes->add('/pembobotan_gap/(:any)', 'PembobotanGap::$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

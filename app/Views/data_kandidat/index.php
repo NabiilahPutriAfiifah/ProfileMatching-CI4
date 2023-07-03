@@ -2,7 +2,6 @@
 <?= $this->section('content') ?>
 
 <?= $this->include('component/alert') ?>
-
 <section class="content">
     <div class="container-fluid">
         <div class="card">
@@ -49,12 +48,12 @@
                             <td><?= esc($pr->i10) ?></td>
                             <td>
                                 <div class="btn-group btn-group-sm">
-                                    <a href="<?= base_url('data_kandidat/update_data_kandidat/'.$pr->id) ?>"
+                                    <a href="<?= base_url('data_kandidat/update_data_kandidat/'.$pr->id_nama_kandidat) ?>"
                                         class="btn text-light rounded mx-1" title="Edit Data"
                                         style="background-color: #445199;">
                                         <i class="fa fa-edit"></i> Edit Data
                                     </a>
-                                    <a href="<?= base_url('data_kandidat/delete_data_kandidat/'.$pr->id) ?>"
+                                    <a href="<?= base_url('data_kandidat/delete_data_kandidat/'.$pr->id_nama_kandidat) ?>"
                                         onclick="if(confirm('Are you sure to delete this data?') === false) event.preventDefault()"
                                         class="btn text-light rounded mx-1" title="Delete Data"
                                         style="background-color: #8080ed;">
