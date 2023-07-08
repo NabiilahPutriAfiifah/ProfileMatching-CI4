@@ -1,38 +1,22 @@
-<table id="example1" class="table table-bordered table-striped">
-    <thead>
-        <th>#</th>
-        <th>Nama Aspek</th>
-        <?php foreach(esc($faktor_penilaian) as $pr) : ?>
-        <th><?= esc($pr->nama_kriteria) ?></th>
-        <?php endforeach; ?>
-    </thead>
-    <tbody>
-        <?php   if(count(esc($faktor_penilaian)) > 0): 
-                                $i = 1;
-                        ?>
-        <?php foreach(esc($faktor_penilaian) as $pr) : ?>
-        <tr>
-            <td><?= $i++; ?></td>
-            <td><?= esc($pr->nama_aspek) ?></td>
-            <td><?= esc($pr->nama_kriteria) ?></td>
-            <td><?= esc($pr->faktor) ?></td>
-            <td><?= esc($pr->nilai) ?></td>
-            <td>
-                <div class="btn-group btn-group-sm">
-                    <a href="<?= base_url('faktor_penilaian/update_faktor_penilaian/'.$pr->id) ?>"
-                        class="btn text-light rounded mx-1" title="Edit Data" style="background-color: #445199;">
-                        <i class="fa fa-edit"></i> Edit Data
-                    </a>
-                    <a href="<?= base_url('faktor_penilaian/delete_faktor_penilaian/'.$pr->id) ?>"
-                        onclick="if(confirm('Are you sure to delete this data?') === false) event.preventDefault()"
-                        class="btn text-light rounded mx-1" title="Delete Data" style="background-color: #8080ed;">
-                        <i class="fa fa-trash"></i> Delete Data
-                    </a>
-                </div>
-
-            </td>
-        </tr>
-        <?php endforeach; ?>
-        <?php endif; ?>
-    </tbody>
-</table>
+INSERT INTO faktor_penilaian(id_aspek,nama_kriteria,faktor,nilai)
+VALUES
+(1,'Common Sense','Secondary Factor',3),
+(1,'Verbalisasi Ide','Secondary Factor',3),
+(1,'Sistematika Berpikir','Core Factor',4),
+(1,'Penalaran dan Solusi Real','Core Factor',4),
+(1,'Konsentrasi','Secondary Factor',3),
+(1,'Logika Praktis','Core Factor',4),
+(1,'Fleksibilitas Berpikir','Core Factor',4),
+(1,'Imajinasi Kreatif','Core Factor',5),
+(1,'Antisipasi','Secondary Factor',3),
+(1,'Potensi Kecerdasan','Core Factor',4),
+(2,'Energi Psikis','Secondary Factor',3),
+(2,'Ketelitian dan tanggung jawab','Core Factor',4),
+(2,'Kehati-hatian','Secondary Factor',2),
+(2,'Pengendalian Perasaan','Secondary Factor',3),
+(2,'Dorongan Berprestasi','Secondary Factor',3),
+(2,'Vitalitas dan Perencanaan','Core Factor',5),
+(3,'Dominance (Kekuasaan)','Secondary Factor',3),
+(3,'Influences (Pengaruh)','Secondary Factor',3),
+(3,'Steadiness (Keteguhan Hati)','Core Factor',4),
+(3,'Compliance (Pemenuhan)','Core Factor',5);

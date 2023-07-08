@@ -37,14 +37,14 @@ class PembobotanGap extends BaseController
     }
 
     public function pembobotan_gap(){
-        $this->data['title'] = 'Nilai Gap';
+        $this->data['title'] = 'Pembobotan Nilai Gap';
         $this->data['breadcrumbs'] = array(
             array(
                 'title' => 'Dashboard',
                 'url' => base_url()
             ),
             array(
-                'title' => 'Nilai Gap'
+                'title' => 'Pembobotan Nilai Gap'
             )
         );
 

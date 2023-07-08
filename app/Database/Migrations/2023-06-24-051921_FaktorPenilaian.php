@@ -39,7 +39,7 @@ class FaktorPenilaian extends Migration
 
 		$this->forge->addKey('id', true)->addKey(['id_aspek'])->addUniqueKey('nama_kriteria');
 
-        $this->forge->addForeignKey('id_aspek', 'aspek', 'id', 'cascade', 'restrict');
+        $this->forge->addForeignKey('id_aspek', 'aspek', 'id', 'cascade', 'cascade');
 
 		$this->forge->createTable('faktor_penilaian', true);
 

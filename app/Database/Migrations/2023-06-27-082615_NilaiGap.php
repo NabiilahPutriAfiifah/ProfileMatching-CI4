@@ -107,7 +107,7 @@ class NilaiGap extends Migration
 
 		$this->forge->addKey('id', true)->addKey(['id_nama_kandidat']);
 
-        $this->forge->addForeignKey('id_nama_kandidat', 'nama_kandidat', 'id', 'cascade', 'restrict');
+        $this->forge->addForeignKey('id_nama_kandidat', 'nama_kandidat', 'id', 'cascade', 'cascade');
 
 		$this->forge->createTable('nilai_gap', true);
     }

@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> <?= $title ?> | Pos Restaurant </title>
+    <title> <?= $title ?> | Profile Matching CI4 </title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

@@ -25,16 +25,9 @@
                             value="<?= isset($data['nama_kriteria']) ? $data['nama_kriteria'] : '' ?>">
                     </div>
                     <div class="form-group">
-                        <label for="nama">Factor :</label>
-                        <select class="form-control select2" name="faktor" id="faktor">
-                            <option disabled selected hidden>Pilih Factor</option>
-                            <option value="Core Factor"
-                                <?= isset($data['faktor']) && $data['faktor'] == "Core Factor" ? 'selected' : ''?>>Core
-                                Factor</option>
-                            <option value="Secondary Factor"
-                                <?= isset($data['faktor']) && $data['faktor'] == "Secondary Factor" ? 'selected' : ''?>>
-                                Secondary Factor</option>
-                        </select>
+                        <label for="nama">Factor : </label>
+                        <input type="text" class="form-control" name="faktor" id="faktor" placeholder="Masukan Faktor"
+                            required value="<?= isset($data['faktor']) ? $data['faktor'] : 'faktor' ?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="bobotcore">Nilai : </label>

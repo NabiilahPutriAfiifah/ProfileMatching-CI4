@@ -10,6 +10,8 @@ use App\Models\NamaKandidatModel;
 use App\Models\FaktorPenilaianModel;
 use App\Models\NilaiGapModel;
 use App\Models\PembobotanGapModel;
+use App\Models\NilaiTotalModel;
+use App\Models\AspekModel;
 // use Dompdf\Dompdf;
 
 class DataKandidat extends BaseController{
@@ -24,17 +26,18 @@ class DataKandidat extends BaseController{
     protected $faktor_penilaian_model;
     protected $nilai_gap_model;
     protected $pembobotan_gap_model;
+    protected $nilai_total_model;
+    protected $aspek_model;
 
     public function __construct() {
 
-        // $this->kecerdasan_model = New KecerdasanModel();
-        // $this->sikap_kerja_model = New SikapKerjaModel();
-        // $this->perilaku_model = New PerilakuModel();
         $this->data_kandidat_model = New DataKandidatModel();
         $this->nama_kandidat_model = New NamaKandidatModel();
         $this->faktor_penilaian_model = New FaktorPenilaianModel();
         $this->nilai_gap_model = New NilaiGapModel();
         $this->pembobotan_gap_model = New PembobotanGapModel();
+        $this->nilai_total_model = New NilaiTotalModel();
+        $this->aspek_model = New AspekModel();
     }
     
 //-------------------------------------------- Kecerdasan -----------------------------------------------------//
@@ -63,10 +66,7 @@ public function data_kandidat(){
                                       data_kandidat.p4, data_kandidat.id_nama_kandidat')
                             ->join('nama_kandidat', 'nama_kandidat.id = data_kandidat.id_nama_kandidat' )
                             ->get()->getResult();
-    // $this->data['kecerdasan'] = $this->kecerdasan_model->getKecerdasan2();
-    // $this->data['sikap_kerja'] = $this->sikap_kerja_model->getSikapKerja2();
-    // $this->data['perilaku'] = $this->perilaku_model->getPerilaku2();
-
+    // $this->nilai_total();
     return view('data_kandidat/index', $this->data);
 }
 
@@ -172,17 +172,21 @@ public function submit_changes_data_kandidat(){
     ];
 
     
+
+    
     if(!empty($this->request->getPost('id'))) {
         $this->data_kandidat_model->where(['id_nama_kandidat'=>$this->request->getPost('id')])->set($data)->update();
         $this->nilai_gap_model->where('id_nama_kandidat', $this->request->getPost('id'))->set($bobot_kandidat)->update();
-        $this->bobot_i($this->request->getPost('id'),'update');
+        $this->bobot_i($data['id_nama_kandidat'],'update');
+        $this->nilai_total($data['id_nama_kandidat'],'update');
+        // $this->nilai_total_model->where('id_nama_kandidat', $this->request->getPost('id'))->set($nilai_total)->update();
         return redirect()->to('data_kandidat')->with('success', 'Berhasil Memperbaharui Data');
     } else {
         $this->data_kandidat_model->insert($data);
         $this->nilai_gap_model->insert($bobot_kandidat);
-        $kandidat = $this->nilai_gap_model->orderBy('id', 'DESC')->first();
-        $this->bobot_i($kandidat['id_nama_kandidat'], 'insert');
-        
+        // $kandidat = $this->nilai_gap_model->orderBy('id', 'DESC')->first();
+        $this->bobot_i($data['id_nama_kandidat'], 'insert');
+        $this->nilai_total($data['id_nama_kandidat'],'insert');
         return redirect()->to('data_kandidat')->with('success', 'Berhasil Menambahkan Data');
     }
 }
@@ -202,9 +206,6 @@ public function delete_data_kandidat($id=''){
 public function bobot_i($id, $labels){
     $bobot = [];
     $bobot_i = $this->nilai_gap_model->where('id_nama_kandidat', $id)->first();
-    // dd($bobot_i);
-    // for ($j = 0; $j < count($bobot_i); $j++){
-    // }
     $bobot['id_nama_kandidat']= $bobot_i['id_nama_kandidat'];
         for ($i = 1; $i <= 10; $i++) { 
             switch ($bobot_i["i$i"]) {
@@ -305,35 +306,48 @@ public function bobot_i($id, $labels){
         } else {
             $this->pembobotan_gap_model->where('id_nama_kandidat', $id)->set($bobot)->update();
         }
+    }
+
+    public function nilai_total($id, $labels){
+        $bobot_gap = $this->pembobotan_gap_model->where('id_nama_kandidat', $id)->orderBy('id ASC')->first();
+        // dd($id);
+        $aspek = $this->aspek_model->select(['bobot_core','bobot_secondary'])->findAll();
+            $core_faktor_i = ($bobot_gap['i3'] + $bobot_gap['i4'] + $bobot_gap['i6'] + $bobot_gap['i7'] + $bobot_gap['i8'] + $bobot_gap['i10']) / 6;
+            $secondary_faktor_i = ($bobot_gap['i1'] + $bobot_gap['i2'] + $bobot_gap['i5'] + $bobot_gap['i9']) / 4;
+            $core_faktor_s = ($bobot_gap['s2'] + $bobot_gap['s6']) / 2;
+            $secondary_faktor_s = ($bobot_gap['s1'] + $bobot_gap['s3'] + $bobot_gap['s4'] + $bobot_gap['s5']) / 4;
+            $core_faktor_p = ($bobot_gap['p3'] + $bobot_gap['p4']) / 2;
+            $secondary_faktor_p = ($bobot_gap['p1'] + $bobot_gap['p2']) / 2;
+            $nilai_total = [
+                'id_nama_kandidat' => $this->request->getPost('nama_pendaftar'),
+                'core_factor_i' => $core_faktor_i,
+                'secondary_factor_i' => $secondary_faktor_i,
+                'nilai_total_i' => (($aspek[0]['bobot_core'] / 100) * $core_faktor_i) + (($aspek[0]['bobot_secondary'] / 100) * $secondary_faktor_i),
+                'core_factor_s' => $core_faktor_s,
+                'secondary_factor_s' => $secondary_faktor_s,
+                'nilai_total_s' => (($aspek[1]['bobot_core'] / 100) * $core_faktor_s) + (($aspek[1]['bobot_secondary'] / 100) * $secondary_faktor_s),
+                'core_factor_p' => $core_faktor_p,
+                'secondary_factor_p' => $secondary_faktor_p,
+                'nilai_total_p' => (($aspek[2]['bobot_core'] / 100) * $core_faktor_p) + (($aspek[2]['bobot_secondary'] / 100) * $secondary_faktor_p),
+            ];
+
+            if ($labels == 'insert') {
+                $this->nilai_total_model->save($nilai_total);
+            } else {
+                $this->nilai_total_model->where('id_nama_kandidat', $nilai_total['id_nama_kandidat'])->set($nilai_total)->update();
+            }
         
+       
         
-    // dd($bobot);
-    // foreach ($bobot as $data){
-    //     $this->pembobotan_gap_model->save([
-    //         'id_nama_kandidat'=>$data['id_nama_kandidat'],
-    //         'i1'=>$data['i1'],
-    //         'i2'=>$data['i2'],
-    //         'i3'=>$data['i3'],
-    //         'i4'=>$data['i4'],
-    //         'i5'=>$data['i5'],
-    //         'i6'=>$data['i6'],
-    //         'i7'=>$data['i7'],
-    //         'i8'=>$data['i8'],
-    //         'i9'=>$data['i9'],
-    //         'i10'=>$data['i10'],
-    //         's1'=>$data['s1'],
-    //         's2'=>$data['s2'],
-    //         's3'=>$data['s3'],
-    //         's4'=>$data['s4'],
-    //         's5'=>$data['s5'],
-    //         's6'=>$data['s6'],
-    //         'p1'=>$data['p1'],
-    //         'p2'=>$data['p2'],
-    //         'p3'=>$data['p3'],
-    //         'p4'=>$data['p4'],
-    //     ]);
-    // };
-    // dd();
-}
+    // dd($nilai_total);
+    }
+
+// public function nilai_total() {
+//     $total = [];
+//     $cores = $this->faktor_penilaian_model->select('faktor')->where('faktor', 'Core Factor')->get()->getResult();
+//     $second = $this->faktor_penilaian_model->select('faktor')->where('faktor', 'Secondary Factor')->get()->getResult();
+//     dd($cores);
+// }
+
 
 }
