@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('perhitungan') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-sort-numeric-down"></i>
                                 <p> Perangkingan </p>
                             </a>

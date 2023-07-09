@@ -5,12 +5,7 @@ namespace App\Controllers;
 use App\Models\PembobotanGapModel;
 use App\Models\FaktorPenilaianModel;
 use App\Models\NamaKandidatModel;
-use App\Models\DataKandiatnModel;
 use App\Models\DataKandidatModel;
-
-// use App\Models\KecerdasanModel;
-// use App\Models\SikapKerjaModel;
-// use App\Models\PerilakuModel;
 
 class PembobotanGap extends BaseController
 {
@@ -19,9 +14,6 @@ class PembobotanGap extends BaseController
     protected $faktor_penilaian_model;
     protected $nama_kandidat_model;
     protected $data_kandidat_model;
-    // protected $kecerdasan_model;
-    // protected $sikap_kerja_model;
-    // protected $perilaku_model;
 
 
     public function __construct() {
@@ -30,9 +22,6 @@ class PembobotanGap extends BaseController
         $this->faktor_penilaian_model = New FaktorPenilaianModel();
         $this->nama_kandidat_model = New NamaKandidatModel();
         $this->data_kandidat_model = New DataKandidatModel();
-        // $this->kecerdasan_model = New KecerdasanModel();
-        // $this->sikap_kerja_model = New SikapKerjaModel();
-        // $this->perilaku_model = New PerilakuModel();
 
     }
 

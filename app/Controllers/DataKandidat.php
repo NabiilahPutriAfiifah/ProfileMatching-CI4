@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-// use App\Models\KecerdasanModel;
-// use App\Models\SikapKerjaModel;
-// use App\Models\PerilakuModel;
 use App\Models\DataKandidatModel;
 use App\Models\NamaKandidatModel;
 use App\Models\FaktorPenilaianModel;
@@ -12,15 +9,12 @@ use App\Models\NilaiGapModel;
 use App\Models\PembobotanGapModel;
 use App\Models\NilaiTotalModel;
 use App\Models\AspekModel;
-// use Dompdf\Dompdf;
+use App\Models\PerhitunganModel;
 
 class DataKandidat extends BaseController{
 
     protected $data;
 
-    // protected $kecerdasan_model;
-    // protected $sikap_kerja_model;
-    // protected $perilaku_model;
     protected $data_kandidat_model;
     protected $nama_kandidat_model;
     protected $faktor_penilaian_model;
@@ -28,6 +22,7 @@ class DataKandidat extends BaseController{
     protected $pembobotan_gap_model;
     protected $nilai_total_model;
     protected $aspek_model;
+    protected $perhitungan_model;
 
     public function __construct() {
 
@@ -38,9 +33,10 @@ class DataKandidat extends BaseController{
         $this->pembobotan_gap_model = New PembobotanGapModel();
         $this->nilai_total_model = New NilaiTotalModel();
         $this->aspek_model = New AspekModel();
+        $this->perhitungan_model = New PerhitunganModel();
     }
     
-//-------------------------------------------- Kecerdasan -----------------------------------------------------//
+//-------------------------------------------- Data Kandidat -----------------------------------------------------//
 
 public function data_kandidat(){
     $this->data['title'] = 'Data Kandidat';
@@ -144,9 +140,10 @@ public function submit_changes_data_kandidat(){
         'p4' => $this->request->getPost('p4'),
         
     ];
-    // dd($data);
+    
+//-------------------------------------------- Menghitung Nilai Gap -----------------------------------------------------//
+
     $faktor_kandidat = $this->faktor_penilaian_model->orderBy('id ASC')->findAll();
-    // dd($faktor_kandidat);
     $bobot_kandidat = [
         'id_nama_kandidat' => $this->request->getPost('nama_pendaftar'),
         'i1' => $data['i1'] - $faktor_kandidat[0]['nilai'],
@@ -179,6 +176,7 @@ public function submit_changes_data_kandidat(){
         $this->nilai_gap_model->where('id_nama_kandidat', $this->request->getPost('id'))->set($bobot_kandidat)->update();
         $this->bobot_i($data['id_nama_kandidat'],'update');
         $this->nilai_total($data['id_nama_kandidat'],'update');
+        $this->perhitungan($data['id_nama_kandidat'],'update');
         // $this->nilai_total_model->where('id_nama_kandidat', $this->request->getPost('id'))->set($nilai_total)->update();
         return redirect()->to('data_kandidat')->with('success', 'Berhasil Memperbaharui Data');
     } else {
@@ -187,6 +185,7 @@ public function submit_changes_data_kandidat(){
         // $kandidat = $this->nilai_gap_model->orderBy('id', 'DESC')->first();
         $this->bobot_i($data['id_nama_kandidat'], 'insert');
         $this->nilai_total($data['id_nama_kandidat'],'insert');
+        $this->perhitungan($data['id_nama_kandidat'],'insert');
         return redirect()->to('data_kandidat')->with('success', 'Berhasil Menambahkan Data');
     }
 }
@@ -197,11 +196,16 @@ public function delete_data_kandidat($id=''){
     }
     $this->nilai_gap_model->where('id_nama_kandidat', $id)->delete();
     $this->pembobotan_gap_model->where('id_nama_kandidat', $id)->delete();
+    $this->nilai_total_model->where('id_nama_kandidat', $id)->delete();
+    $this->perhitungan_model->where('id_nama_kandidat', $id)->delete();
     $delete = $this->data_kandidat_model->where('id_nama_kandidat', $id)->delete();
     if($delete){
         return redirect()->to('data_kandidat')->with('success', 'Data Berhasil di Hapus');
     }
 }
+
+    
+//-------------------------------------------- Pembobotan Nilai Gap -----------------------------------------------------//
 
 public function bobot_i($id, $labels){
     $bobot = [];
@@ -308,16 +312,21 @@ public function bobot_i($id, $labels){
         }
     }
 
+        
+//-------------------------------------------- Perhitungan Nilai Total -----------------------------------------------------//
+
     public function nilai_total($id, $labels){
         $bobot_gap = $this->pembobotan_gap_model->where('id_nama_kandidat', $id)->orderBy('id ASC')->first();
         // dd($id);
         $aspek = $this->aspek_model->select(['bobot_core','bobot_secondary'])->findAll();
+        
             $core_faktor_i = ($bobot_gap['i3'] + $bobot_gap['i4'] + $bobot_gap['i6'] + $bobot_gap['i7'] + $bobot_gap['i8'] + $bobot_gap['i10']) / 6;
             $secondary_faktor_i = ($bobot_gap['i1'] + $bobot_gap['i2'] + $bobot_gap['i5'] + $bobot_gap['i9']) / 4;
             $core_faktor_s = ($bobot_gap['s2'] + $bobot_gap['s6']) / 2;
             $secondary_faktor_s = ($bobot_gap['s1'] + $bobot_gap['s3'] + $bobot_gap['s4'] + $bobot_gap['s5']) / 4;
             $core_faktor_p = ($bobot_gap['p3'] + $bobot_gap['p4']) / 2;
             $secondary_faktor_p = ($bobot_gap['p1'] + $bobot_gap['p2']) / 2;
+
             $nilai_total = [
                 'id_nama_kandidat' => $this->request->getPost('nama_pendaftar'),
                 'core_factor_i' => $core_faktor_i,
@@ -336,18 +345,26 @@ public function bobot_i($id, $labels){
             } else {
                 $this->nilai_total_model->where('id_nama_kandidat', $nilai_total['id_nama_kandidat'])->set($nilai_total)->update();
             }
-        
-       
-        
-    // dd($nilai_total);
     }
 
-// public function nilai_total() {
-//     $total = [];
-//     $cores = $this->faktor_penilaian_model->select('faktor')->where('faktor', 'Core Factor')->get()->getResult();
-//     $second = $this->faktor_penilaian_model->select('faktor')->where('faktor', 'Secondary Factor')->get()->getResult();
-//     dd($cores);
-// }
+        
+//-------------------------------------------- Perhitungan Ranking -----------------------------------------------------//
 
+    public function perhitungan($id, $labels){
+        $hitung = $this->nilai_total_model->where('id_nama_kandidat', $id)->orderBy('id ASC')->first();
+        $aspek = $this->aspek_model->select('persentase')->findAll();
+
+        $rank = [
+            'id_nama_kandidat' => $this->request->getPost('nama_pendaftar'),
+            'nilai_total' => ($hitung['nilai_total_i'] * ($aspek[0]['persentase']) / 100) + ($hitung['nilai_total_s'] * ($aspek[1]['persentase']) / 100) + ($hitung['nilai_total_p'] * ($aspek[2]['persentase']) / 100),
+            'rank' => '1',
+        ];
+
+        if ($labels == 'insert') {
+            $this->perhitungan_model->save($rank);
+        } else {
+            $this->perhitungan_model->where('id_nama_kandidat', $rank['id_nama_kandidat'])->set($rank)->update();
+        }
+    }
 
 }

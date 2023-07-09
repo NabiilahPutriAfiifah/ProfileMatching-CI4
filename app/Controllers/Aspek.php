@@ -43,27 +43,6 @@ class Aspek extends BaseController{
         return view('aspek/index', $this->data);
     }
 
-    public function create_aspek(){
-        $this->data['title'] = 'Tambah Data Aspek';
-        $this->data['breadcrumbs'] = array(
-            array(
-                'title' => 'Dashboard',
-                'url' => base_url()
-            ),
-            array(
-                'title' => 'Aspek',
-                'url'   => base_url('aspek')
-            ),
-            array(
-                'title' => 'Tambah Data Aspek'
-            )
-        );
-
-        $this->data['aspek'] = $this->aspek_model->orderBy('id ASC')->select('*')->get()->getResult();
-
-        return view('aspek/create', $this->data);
-    }
-
 
     public function update_aspek($id=''){
         $this->data['title'] = 'Ubah Data Aspek';
@@ -107,14 +86,5 @@ class Aspek extends BaseController{
         }
     }
 
-    public function delete_aspek($id=''){
-        if(empty($id)){
-            return redirect()->to('aspek')->with('error', 'Data Tidak di Temukan');
-        }
-        $delete = $this->aspek_model->delete($id);
-        if($delete){
-            return redirect()->to('aspek')->with('success', 'Data Berhasil di Hapus');
-        }
-    }
 
 }

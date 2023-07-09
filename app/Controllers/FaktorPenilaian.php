@@ -46,28 +46,6 @@ class FaktorPenilaian extends BaseController{
         return view('faktor_penilaian/index', $this->data);
     }
 
-    public function create_faktor_penilaian(){
-        $this->data['title'] = 'Tambah Data Faktor Penilaian';
-        $this->data['breadcrumbs'] = array(
-            array(
-                'title' => 'Dashboard',
-                'url' => base_url()
-            ),
-            array(
-                'title' => 'FaktorPenilaian',
-                'url'   => base_url('faktor_penilaian')
-            ),
-            array(
-                'title' => 'Tambah Data Faktor Penilaian'
-            )
-        );
-
-        $this->data['faktor_penilaian'] = $this->faktor_penilaian_model->orderBy('id ASC')->select('*')->get()->getResult();
-        $this->data['aspek'] = $this->aspek_model->orderBy('id ASC')->select('*')->get()->getResult();
-
-        return view('faktor_penilaian/create', $this->data);
-    }
-
 
     public function update_faktor_penilaian($id=''){
         $this->data['title'] = 'Ubah Data Faktor Penilaian';
@@ -108,16 +86,6 @@ class FaktorPenilaian extends BaseController{
         } else {
             $this->faktor_penilaian_model->insert($data);
             return redirect()->to('faktor_penilaian')->with('success', 'Berhasil Menambahkan Data');
-        }
-    }
-
-    public function delete_faktor_penilaian($id=''){
-        if(empty($id)){
-            return redirect()->to('faktor_penilaian')->with('error', 'Data Tidak di Temukan');
-        }
-        $delete = $this->faktor_penilaian_model->delete($id);
-        if($delete){
-            return redirect()->to('faktor_penilaian')->with('success', 'Data Berhasil di Hapus');
         }
     }
 

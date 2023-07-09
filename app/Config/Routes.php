@@ -77,6 +77,10 @@ $routes->add('/pembobotan_gap/(:any)', 'PembobotanGap::$1');
 $routes->add('/nilai_total', 'NilaiTotal::nilai_total');
 $routes->add('/nilai_total/(:any)', 'NilaiTotal::$1');
 
+//Perhitungan
+$routes->add('/perhitungan', 'Perhitungan::perhitungan');
+$routes->add('/perhitungan/(:any)', 'Perhitungan::$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

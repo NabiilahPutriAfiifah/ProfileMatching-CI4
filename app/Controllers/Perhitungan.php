@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\NilaiTotalModel;
+use App\Models\PerhitunganModel;
 use App\Models\FaktorPenilaianModel;
 use App\Models\NamaKandidatModel;
 use App\Models\DataKandidatModel;
 
 
-class NilaiTotal extends BaseController
+class Perhitungan extends BaseController
 {
     protected $data;
-    protected $nilai_total_model;
+    protected $perhitungan_model;
     protected $faktor_penilaian_model;
     protected $nama_kandidat_model;
     protected $data_kandidat_model;
@@ -19,13 +19,13 @@ class NilaiTotal extends BaseController
 
     public function __construct() {
 
-        $this->nilai_total_model = New NilaiTotalModel();
+        $this->perhitungan_model = New PerhitunganModel();
         $this->faktor_penilaian_model = New FaktorPenilaianModel();
         $this->nama_kandidat_model = New NamaKandidatModel();
         $this->data_kandidat_model = New DataKandidatModel();
     }
 
-    public function nilai_total(){
+    public function perhitungan(){
         $this->data['title'] = 'Nilai Total';
         $this->data['breadcrumbs'] = array(
             array(
@@ -40,15 +40,14 @@ class NilaiTotal extends BaseController
         $this->data['faktor_penilaian'] = $this->faktor_penilaian_model->orderBy('id ASC')->select('*')->get()->getResult();
         $this->data['nama_kandidat'] = $this->nama_kandidat_model->orderBy('id ASC')->select('*')->get()->getResult();
         $this->data['data_kandidat'] = $this->data_kandidat_model->orderBy('id ASC')->select('*')->get()->getResult();
-        $this->data['bobot'] = $this->nilai_total_model->findAll();
-        $this->data['nilai_total'] = $this->nilai_total_model
-                                ->orderBy('id ASC')
-                                ->select('nilai_total.id, nama_kandidat.nama_pendaftar, 
-                                nilai_total.core_factor_i, nilai_total.secondary_factor_i, nilai_total.nilai_total_i, nilai_total.core_factor_s, nilai_total.secondary_factor_s, nilai_total.nilai_total_s, nilai_total.core_factor_p, nilai_total.secondary_factor_p, nilai_total.nilai_total_p')
-                                ->join('nama_kandidat', 'nama_kandidat.id = nilai_total.id_nama_kandidat' )
+        $this->data['bobot'] = $this->perhitungan_model->findAll();
+        $this->data['perhitungan'] = $this->perhitungan_model
+                                ->orderBy('nilai_total', 'DESC')
+                                ->select('perhitungan.id, nama_kandidat.nama_pendaftar, 
+                                perhitungan.nilai_total, perhitungan.rank')
+                                ->join('nama_kandidat', 'nama_kandidat.id = perhitungan.id_nama_kandidat' )
                                 ->get()->getResult();
 
-        return view('nilai_total/index', $this->data);
+        return view('perhitungan/index', $this->data);
     }
-
 }
